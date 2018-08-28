@@ -1,0 +1,33 @@
+version: "3.4"
+services:
+  mariadb:
+    image: mariadb:10.1
+    working_dir: /application
+    volumes:
+    - ./app:/application
+    - ./mysql-dump/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+    - "3306"
+
+  webserver:
+    image: nginx
+    working_dir: /application
+    volumes:
+    - ./app:/application
+    - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    environment:
+    - VIRTUAL_HOST=${VIRTUAL_HOST}
+    ports:
+    - "80"
+
+  php-fpm:
+    build: config/php-fpm
+    working_dir: /application
+    volumes:
+    - ./app:/application
+    - ./config/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
