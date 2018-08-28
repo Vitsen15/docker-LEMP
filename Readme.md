@@ -10,9 +10,10 @@ Dockerized template on LEMP stack
 |    `Nginx`    |    latest     |
 
 ## Setup ##
-
- * Clone source code repository to `app/` dir, set it up as git module, commit and push all project after.
+ * Clone the repository.
+ * Clone source code repository to project root and rename project dir to `app/`, set it up as git module, commit and 
+ push all project after.
  * Put MySQL dump file with name `dump.sql` to `mysql-dump/` dir.
  * Define document root for nginx at `config/nginx/nginx.conf`.
- * Rename .env.sample to .env and fill all variables. **Note:** if you don't fill COMPOSE_PROJECT_NAME variable,
- it will be replaced by parent dir by default. 
+ * Create .env file and fill all variables like in .env.sample. **Note:** if you don't fill `COMPOSE_PROJECT_NAME` 
+ variable, it will be replaced by parent dir by default. 
