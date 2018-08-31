@@ -7,7 +7,8 @@ Dockerized template on LEMP stack
 |     :---:     |     :---:     |
 |   `php-fpm`   |      7.2      |
 |   `MariaDB`   |     10.1      |
-|    `Nginx`    |    latest     |
+|    `Nginx`    |    stable     |
+|   `Composer`  |    latest     |
 
 ## Setup ##
  * Clone the repository.
