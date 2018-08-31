@@ -2,8 +2,6 @@ version: "3.4"
 services:
   mariadb:
     image: mariadb:10.1
-    volumes:
-    - ./mysql-dump/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     - MYSQL_DATABASE=${MYSQL_DATABASE}
