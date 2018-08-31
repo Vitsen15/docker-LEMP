@@ -2,9 +2,7 @@ version: "3.4"
 services:
   mariadb:
     image: mariadb:10.1
-    working_dir: /application
     volumes:
-    - ./app:/application
     - ./mysql-dump/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -31,3 +29,11 @@ services:
     volumes:
     - ./app:/application
     - ./config/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+
+  composer:
+    restart: 'no'
+    image: composer:latest
+    working_dir: /application
+    command: composer install --ignore-platform-reqs --no-scripts
+    volumes:
+    - ./app:/application
