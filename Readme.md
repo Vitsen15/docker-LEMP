@@ -20,7 +20,7 @@ Dockerized template on LEMP stack
  * Create .env file and fill all variables like in .env.sample. **Note:** if you don't fill `COMPOSE_PROJECT_NAME` 
  variable, it will be replaced by parent dir by default.
  
- ### Setup ###
+### Setup ###
  
  **Note: flag -d is used only for running containers in the background**
  
