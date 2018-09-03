@@ -1,7 +1,7 @@
 Dockerized template on LEMP stack
 =================================
 
-## Used images ##
+### Used images ###
 
 |     Image     |    Version    |
 |     :---:     |     :---:     |
@@ -10,7 +10,7 @@ Dockerized template on LEMP stack
 |    `Nginx`    |    stable     |
 |   `Composer`  |    latest     |
 
-## Configuration ##
+### Configuration ###
 
  * Clone the repository.
  * Clone source code repository to project root and rename project dir to `app/`, set it up as git module, commit and 
@@ -20,7 +20,7 @@ Dockerized template on LEMP stack
  * Create .env file and fill all variables like in .env.sample. **Note:** if you don't fill `COMPOSE_PROJECT_NAME` 
  variable, it will be replaced by parent dir by default.
  
- ## Setup ##
+ ### Setup ###
  
  **Note: flag -d is used only for running containers in the background**
  
