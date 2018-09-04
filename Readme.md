@@ -26,8 +26,12 @@ Dockerized template on LEMP stack
  
  * Start containers: run `docker-compose up -d` for building docker images and start docker containers.
  
- * Import database: run `sudo ./db-drop-import.sh` for import database to container with MariaDB. **Note:** this script
- drops all database files from `mysql-db/` dir, recreates container and imports db from `mysql-dump` to it.
+ * For drop and import database to container with MariaDB: run `sudo ./db-reset.sh`.
+ **Note:** this script drops all database files from `mysql-db/` dir, recreates MariaDB container and imports db from
+ `mysql-dump` to it.
+ 
+ * For import dump file to container with MariaDB: run `db-import.sh.sh [container_name] [user_name] [db_name]
+ [dump_file_path]`, then script requires a password for `user_name` and begins import after if authorized.
  
  * Install php dependencies: run `docker-compose up -d` for starting composer, **Note:** every time when you run
  `docker-compose up -d` you also start composer.
