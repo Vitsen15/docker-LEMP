@@ -28,7 +28,7 @@ services:
     working_dir: /application
     volumes:
     - ./app:/application
-    - ./config/php-fpm/${PHP_VERSION}/php-fpm.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+    - ./config/php-fpm/${PHP_VERSION}/php-fpm.ini:/etc/php/${PHP_VERSION}/fpm/conf.d/99-overrides.ini
 
   composer:
     restart: 'no'
