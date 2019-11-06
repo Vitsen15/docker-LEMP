@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y \
         libxml2-dev \
         g++ \
         vim \
+        tail \
+        less \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-enable mysqli \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
     && docker-php-ext-configure json --enable-json \
