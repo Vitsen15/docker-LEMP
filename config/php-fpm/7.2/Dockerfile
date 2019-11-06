@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
         libxml2-dev \
         g++ \
         vim \
-        tail \
         less \
     && docker-php-ext-install mysqli \
     && docker-php-ext-enable mysqli \
