@@ -25,7 +25,7 @@ services:
         ipv4_address: 10.195.128.2
 
   webserver:
-    image: nginx:stable
+    build: config/nginx
     working_dir: /application
     volumes:
     - ./app:/application
