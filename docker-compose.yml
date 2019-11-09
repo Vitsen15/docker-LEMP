@@ -17,6 +17,7 @@ services:
     - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
     - ./mysql-db:/var/lib/mysql
+    - ./logs/mysql/:/var/log/mysql
     ports:
     - "3306"
     networks:
@@ -29,6 +30,7 @@ services:
     volumes:
     - ./app:/application
     - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    - ./logs/nginx:/var/log/nginx
     depends_on:
       - "mariadb"
       - "php-fpm"

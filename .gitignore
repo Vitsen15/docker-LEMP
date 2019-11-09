@@ -59,5 +59,14 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
-app/*
+#Source code
 !app/.gitkeep
+app/*
+
+#logs
+!logs/*/.gitkeep
+logs/*/*
+
+#DB
+!mysql-db/.gitkeep
+mysql-db/*
