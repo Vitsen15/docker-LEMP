@@ -9,7 +9,7 @@ networks:
 
 services:
   mariadb:
-    image: mariadb:10.1
+    build: config/mysql
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     - MYSQL_DATABASE=${MYSQL_DATABASE}
