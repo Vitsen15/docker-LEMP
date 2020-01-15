@@ -6,7 +6,7 @@ Dockerized template on LEMP stack
 |     Image     |    Version    |
 |     :---:     |     :---:     |
 |   `php-fpm`   |    5.6_7.2    |
-|   `MariaDB`   |     10.1      |
+|    `MySQL`    |     10.1      |
 |    `Nginx`    |    stable     |
 |   `Composer`  |    latest     |
 

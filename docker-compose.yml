@@ -1,15 +1,8 @@
 version: "3.4"
-networks:
-  network-name:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.195.128.0/24
-
 services:
-  mariadb:
+  mysql:
     build: config/mysql
+    container_name: ${COMPOSE_PROJECT_NAME}_mysql
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -20,39 +13,33 @@ services:
     - ./logs/mysql/:/var/log/mysql
     ports:
     - "3306"
-    networks:
-      network-name:
-        ipv4_address: 10.195.128.2
 
   webserver:
     build: config/nginx
+    container_name: ${COMPOSE_PROJECT_NAME}_webserver
     working_dir: /application
     volumes:
     - ./app:/application
     - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     - ./logs/nginx:/var/log/nginx
     depends_on:
-      - "mariadb"
+      - "mysql"
       - "php-fpm"
     ports:
-    - "8001:80"
-    networks:
-      network-name:
-        ipv4_address: 10.195.128.3
+    - "${NGINX_EXTERNAL_PORT}:80"
 
   php-fpm:
     build: config/php-fpm/${PHP_VERSION}
+    container_name: ${COMPOSE_PROJECT_NAME}_php-fpm
     working_dir: /application
     volumes:
     - ./app:/application
     - ./config/php-fpm/${PHP_VERSION}/php-fpm.ini:/etc/php/${PHP_VERSION}/fpm/conf.d/99-overrides.ini
-    networks:
-      network-name:
-        ipv4_address: 10.195.128.4
 
   composer:
     restart: 'no'
     image: composer:latest
+    container_name: ${COMPOSE_PROJECT_NAME}_composer
     working_dir: /application
     command: composer install --ignore-platform-reqs --no-scripts
     volumes:
