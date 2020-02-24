@@ -18,9 +18,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
     && docker-php-ext-configure json --enable-json \
     && docker-php-ext-install -j$(nproc) json \
-    && docker-php-ext-configure json --enable-zip \
+    && docker-php-ext-configure json --enable-json \
     && docker-php-ext-install -j$(nproc) zip \
-    && docker-php-ext-configure pdo_mysql --enable-iconv \
+    && docker-php-ext-configure pdo_mysql \
     && docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-configure gd \
         --with-gd \
