@@ -70,3 +70,4 @@ logs/*/*
 #DB
 !mysql-db/.gitkeep
 mysql-db/*
+mysql-dump/*
