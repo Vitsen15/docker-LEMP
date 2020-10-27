@@ -50,6 +50,8 @@ services:
     image: "redis:alpine"
     networks:
       - default-net
+    ports:
+      - "${REDIS_EXTERNAL_PORT}:6379"
 
   composer:
     restart: 'no'
