@@ -59,13 +59,9 @@ services:
     ports:
       - "${REDIS_EXTERNAL_PORT}:6379"
     networks:
-<<<<<<< Updated upstream
-      - default-net
+      - internal
     ports:
       - "${REDIS_EXTERNAL_PORT}:6379"
-=======
-      - internal
->>>>>>> Stashed changes
 
   composer:
     restart: 'no'
