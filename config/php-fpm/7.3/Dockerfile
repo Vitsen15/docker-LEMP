@@ -4,17 +4,21 @@ WORKDIR "/application"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && pecl install xdebug-2.7.1 \ && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
         libjpeg62-turbo-dev \
         libicu-dev \
         libxml2-dev \
-	libzip-dev \
+        libzip-dev \
         g++ \
         vim \
         less \
+        wget \
+        git \
+        unzip \
+    && docker-php-ext-enable xdebug \
     && docker-php-ext-install mysqli \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
@@ -43,3 +47,5 @@ RUN apt-get update && apt-get install -y \
 
 # Copy configuration
 COPY php.ini /usr/local/etc/php/conf.d/
+
+CMD ["php-fpm"]
