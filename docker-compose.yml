@@ -11,6 +11,7 @@ services:
   mysql:
     build: config/mysql
     container_name: ${COMPOSE_PROJECT_NAME}_mysql
+    command: --max_allowed_packet=32505856
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     - MYSQL_DATABASE=${MYSQL_DATABASE}
