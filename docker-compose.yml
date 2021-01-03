@@ -5,7 +5,7 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 192.168.220.0/24
+        - subnet: ${SUBNET_IP}/24
 
 services:
   mysql:
