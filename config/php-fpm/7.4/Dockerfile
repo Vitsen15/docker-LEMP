@@ -22,6 +22,8 @@ RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-install mysqli \
     && docker-php-ext-enable mysqli \
+    && docker-php-ext-install exif \
+    && docker-php-ext-enable exif \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
     && docker-php-ext-install -j$(nproc) json \
@@ -41,6 +43,9 @@ RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
     && docker-php-ext-install -j$(nproc) mbstring\
     && docker-php-ext-configure soap \
     && docker-php-ext-install -j$(nproc) soap
+
+RUN wget https://getcomposer.org/installer -O - -q \
+    | php -- --install-dir=/bin --filename=composer --quiet
 
 # Copy configuration
 COPY php.ini /usr/local/etc/php/conf.d/
