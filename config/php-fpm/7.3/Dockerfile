@@ -45,6 +45,7 @@ RUN apt-get update && pecl install xdebug-2.7.1 \ && apt-get install -y \
     && docker-php-ext-configure soap --enable-soap \
     && docker-php-ext-install -j$(nproc) soap
 
+# Install composer
 RUN wget https://getcomposer.org/installer -O - -q \
     | php -- --install-dir=/bin --filename=composer --quiet
 
