@@ -21,7 +21,7 @@ services:
     - ./mysql-db:/var/lib/mysql
     - ./logs/mysql/:/var/log/mysql
     ports:
-    - "3306"
+    - "${MYSQL_EXTERNAL_PORT}:3306"
     networks:
       internal:
         ipv4_address: ${SUBNET_IP}.6
