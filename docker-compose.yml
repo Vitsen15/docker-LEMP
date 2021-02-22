@@ -5,12 +5,13 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 192.168.220.0/24
+        - subnet: ${SUBNET_IP}.0/24
 
 services:
   mysql:
     build: config/mysql
     container_name: ${COMPOSE_PROJECT_NAME}_mysql
+    command: --max_allowed_packet=32505856
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -20,9 +21,10 @@ services:
     - ./mysql-db:/var/lib/mysql
     - ./logs/mysql/:/var/log/mysql
     ports:
-    - "3306"
+    - "${MYSQL_EXTERNAL_PORT}:3306"
     networks:
-      - internal
+      internal:
+        ipv4_address: ${SUBNET_IP}.6
 
   webserver:
     build: config/nginx
@@ -38,7 +40,10 @@ services:
     ports:
     - "${NGINX_EXTERNAL_PORT}:80"
     networks:
-      - internal  
+      internal:
+        ipv4_address: ${SUBNET_IP}.3
+    depends_on:
+      - mysql
 
   php-fpm:
     build: config/php-fpm/${PHP_VERSION}
@@ -48,10 +53,13 @@ services:
     - ./app:/application
     - ./config/php-fpm/${PHP_VERSION}/php-fpm.ini:/etc/php/${PHP_VERSION}/fpm/conf.d/99-overrides.ini
     environment:
-      XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1"
+      XDEBUG_CONFIG: "remote_host=host.docker.internal remote_enable=1"
       PHP_IDE_CONFIG: "serverName=Docker"
     networks:
-      - internal
+      internal:
+        ipv4_address: ${SUBNET_IP}.4
+    depends_on:
+      - webserver
 
   redis:
     image: "redis:alpine"
@@ -59,13 +67,7 @@ services:
     ports:
       - "${REDIS_EXTERNAL_PORT}:6379"
     networks:
-      - internal
-
-  composer:
-    restart: 'no'
-    image: composer:latest
-    container_name: ${COMPOSE_PROJECT_NAME}_composer
-    working_dir: /application
-    command: bash -c "composer install --ignore-platform-reqs --no-scripts && composer du"
-    volumes:
-      - ./app:/application
+      internal:
+        ipv4_address: ${SUBNET_IP}.5
+    depends_on:
+      - php-fpm
