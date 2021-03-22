@@ -8,6 +8,8 @@ RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
+        libxpm-dev \
+        libwebp-dev \
         libjpeg62-turbo-dev \
         libicu-dev \
         libxml2-dev \
@@ -31,7 +33,7 @@ RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
     && docker-php-ext-install -j$(nproc) zip \
     && docker-php-ext-configure iconv \
     && docker-php-ext-install -j$(nproc) iconv \
-    && docker-php-ext-configure gd \
+    && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure bcmath \
     && docker-php-ext-install -j$(nproc) bcmath\
