@@ -4,7 +4,7 @@ WORKDIR "/application"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
+RUN apt-get update && pecl install xdebug-2.9.8 \ && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
