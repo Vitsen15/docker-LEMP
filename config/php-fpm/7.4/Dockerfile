@@ -4,7 +4,7 @@ WORKDIR "/application"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
+RUN apt-get update \ && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -21,7 +21,6 @@ RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
         wget \
         git \
         unzip \
-    && docker-php-ext-enable xdebug \
     && docker-php-ext-install mysqli \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-install exif \
