@@ -58,6 +58,6 @@ RUN usermod -u ${USER_ID} www-data && groupmod -g ${GROUP_ID} www-data
 USER "${USER_ID}:${GROUP_ID}"
 
 # Copy configuration
-COPY php.ini /usr/local/etc/php/conf.d/
+ADD ./php.ini /usr/local/etc/php/php.ini
 
 CMD ["php-fpm"]
