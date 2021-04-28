@@ -4,7 +4,7 @@ WORKDIR "/application"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && pecl install xdebug-2.9.8 \ && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
         wget \
         git \
         unzip \
+    && docker-php-ext-enable xdebug \
     && docker-php-ext-install mysqli \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-install exif \
@@ -44,7 +45,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) mbstring\
     && docker-php-ext-configure soap \
     && docker-php-ext-install -j$(nproc) soap
-
 # Install composer
 RUN wget https://getcomposer.org/installer -O - -q \
     | php -- --install-dir=/bin --filename=composer --quiet
