@@ -50,6 +50,6 @@ RUN wget https://getcomposer.org/installer -O - -q \
     | php -- --install-dir=/bin --filename=composer --quiet
 
 # Copy configuration
-COPY php.ini /usr/local/etc/php/conf.d/
+ADD ./php.ini /usr/local/etc/php/php.ini
 
 CMD ["php-fpm"]
