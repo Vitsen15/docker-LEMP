@@ -3,8 +3,10 @@ FROM php:7.4-fpm
 WORKDIR "/application"
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG USER_ID
+ARG GROUP_ID
 
-RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
+RUN apt-get update && pecl install xdebug-2.9.8 \ && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -50,7 +52,12 @@ RUN apt-get update && pecl install xdebug-3.0.1 \ && apt-get install -y \
 RUN wget https://getcomposer.org/installer -O - -q \
     | php -- --install-dir=/bin --filename=composer --quiet
 
+# Change user and group ids to machine.
+RUN usermod -u ${USER_ID} www-data && groupmod -g ${GROUP_ID} www-data
+
+USER "${USER_ID}:${GROUP_ID}"
+
 # Copy configuration
-COPY php.ini /usr/local/etc/php/conf.d/
+ADD ./php.ini /usr/local/etc/php/php.ini
 
 CMD ["php-fpm"]

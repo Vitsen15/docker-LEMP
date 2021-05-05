@@ -46,7 +46,11 @@ services:
       - mysql
 
   php-fpm:
-    build: config/php-fpm/${PHP_VERSION}
+    build:
+      context: ./config/php-fpm/${PHP_VERSION}
+      args:
+        - USER_ID
+        - GROUP_ID
     container_name: ${COMPOSE_PROJECT_NAME}_php-fpm
     working_dir: /application
     volumes:
@@ -54,7 +58,7 @@ services:
     - ./config/php-fpm/${PHP_VERSION}/php-fpm.ini:/etc/php/${PHP_VERSION}/fpm/conf.d/99-overrides.ini
     environment:
       XDEBUG_CONFIG: "remote_host=host.docker.internal remote_enable=1"
-      PHP_IDE_CONFIG: "serverName=Docker"
+      PHP_IDE_CONFIG: "serverName=${COMPOSE_PROJECT_NAME}-docker"
     networks:
       internal:
         ipv4_address: ${SUBNET_IP}.4
