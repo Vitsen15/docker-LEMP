@@ -71,3 +71,7 @@ logs/*/*
 !mysql-db/.gitkeep
 mysql-db/*
 mysql-dump/*
+
+#Backup files
+!backup-files/.gitkeep
+backup-files/*
