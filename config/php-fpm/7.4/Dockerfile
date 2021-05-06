@@ -8,7 +8,6 @@ ARG GROUP_ID
 
 RUN apt-get update \ 
     && pecl install xdebug-2.9.8 \
-    && pecl install redis && docker-php-ext-enable redis \
     && pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
     && apt-get install -y \
