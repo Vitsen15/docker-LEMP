@@ -4,7 +4,11 @@ WORKDIR "/application"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && pecl install xdebug-2.7.1 \ && apt-get install -y \
+RUN apt-get update \ 
+    && pecl install xdebug-2.7.1 \
+    && pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -19,6 +23,7 @@ RUN apt-get update && pecl install xdebug-2.7.1 \ && apt-get install -y \
         git \
         unzip \
     && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable redis \
     && docker-php-ext-install mysqli \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
