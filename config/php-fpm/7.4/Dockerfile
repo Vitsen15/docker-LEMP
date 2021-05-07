@@ -6,11 +6,14 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG USER_ID
 ARG GROUP_ID
 
+# Copy configuration
+ADD ./php.ini /usr/local/etc/php/php.ini
+
 RUN apt-get update \ 
+    && pear config-set php_ini /usr/local/etc/php/php.ini \
     && pecl install xdebug-2.9.8 \
-    && pecl install redis && docker-php-ext-enable redis \
     && pecl install -o -f redis \
-    &&  rm -rf /tmp/pear \
+    && rm -rf /tmp/pear \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -29,7 +32,6 @@ RUN apt-get update \
         git \
         unzip \
     && docker-php-ext-enable xdebug \
-    && docker-php-ext-enable redis \
     && docker-php-ext-install mysqli \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-install exif \
@@ -61,8 +63,5 @@ RUN wget https://getcomposer.org/installer -O - -q \
 RUN usermod -u ${USER_ID} www-data && groupmod -g ${GROUP_ID} www-data
 
 USER "${USER_ID}:${GROUP_ID}"
-
-# Copy configuration
-ADD ./php.ini /usr/local/etc/php/php.ini
 
 CMD ["php-fpm"]
