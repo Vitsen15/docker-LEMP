@@ -6,7 +6,12 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG USER_ID
 ARG GROUP_ID
 
-RUN apt-get update && pecl install xdebug-2.9.8 \ && apt-get install -y \
+RUN apt-get update \ 
+    && pecl install xdebug-2.9.8 \
+    && pecl install redis && docker-php-ext-enable redis \
+    && pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -24,6 +29,7 @@ RUN apt-get update && pecl install xdebug-2.9.8 \ && apt-get install -y \
         git \
         unzip \
     && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable redis \
     && docker-php-ext-install mysqli \
     && docker-php-ext-enable mysqli \
     && docker-php-ext-install exif \
