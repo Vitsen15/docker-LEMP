@@ -3,6 +3,8 @@ FROM php:7.3-fpm
 WORKDIR "/application"
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG USER_ID
+ARG GROUP_ID
 
 RUN apt-get update \ 
     && pecl install xdebug-2.7.1 \
@@ -56,5 +58,10 @@ RUN wget https://getcomposer.org/installer -O - -q \
 
 # Copy configuration
 ADD ./php.ini /usr/local/etc/php/php.ini
+# Change user and group ids to machine.
+RUN usermod -u ${USER_ID} www-data && groupmod -g ${GROUP_ID} www-data
+
+USER "${USER_ID}:${GROUP_ID}"
+
 
 CMD ["php-fpm"]
