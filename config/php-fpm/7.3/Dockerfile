@@ -7,7 +7,7 @@ ARG USER_ID
 ARG GROUP_ID
 
 RUN apt-get update \ 
-    && pecl install xdebug-2.7.1 \
+    && pecl install xdebug \
     && pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
     && apt-get install -y \
@@ -56,12 +56,12 @@ RUN apt-get update \
 RUN wget https://getcomposer.org/installer -O - -q \
     | php -- --install-dir=/bin --filename=composer --quiet
 
-# Copy configuration
-ADD ./php.ini /usr/local/etc/php/php.ini
 # Change user and group ids to machine.
 RUN usermod -u ${USER_ID} www-data && groupmod -g ${GROUP_ID} www-data
 
 USER "${USER_ID}:${GROUP_ID}"
 
+# Copy configuration
+ADD ./php.ini /usr/local/etc/php/php.ini
 
 CMD ["php-fpm"]
