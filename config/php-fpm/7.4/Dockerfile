@@ -38,6 +38,8 @@ RUN apt-get update \
     && docker-php-ext-install -j$(nproc) json \
     && docker-php-ext-configure zip \
     && docker-php-ext-install -j$(nproc) zip \
+    && docker-php-ext-install exif \
+    && docker-php-ext-enable exif \
     && docker-php-ext-configure iconv \
     && docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-configure gd --with-jpeg \
