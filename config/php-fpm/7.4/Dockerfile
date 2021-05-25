@@ -7,9 +7,6 @@ ARG USER_ID
 ARG GROUP_ID
 
 RUN apt-get update \ 
-    && pecl install xdebug \
-    && pecl install -o -f redis \
-    &&  rm -rf /tmp/pear \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -21,12 +18,18 @@ RUN apt-get update \
         libxml2-dev \
         libzip-dev \
         libonig-dev \
+        libmagickwand-dev \
+        libmagickcore-dev \
         g++ \
         vim \
         less \
         wget \
         git \
         unzip \
+    && pecl install xdebug \
+    && pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    && pecl install imagick \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-enable redis \
     && docker-php-ext-install mysqli \
