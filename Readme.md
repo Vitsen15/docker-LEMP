@@ -3,12 +3,12 @@ Dockerized template on LEMP stack
 
 ### Used images ###
 
-|     Image     |    Version    |
-|     :---:     |     :---:     |
-|   `php-fpm`   |  5.6_7.2_7.3  |
-|    `MySQL`    |      5.7      |
-|    `Nginx`    |    stable     |
-|   `Composer`  |    latest     |
+|     Image     |      Version      |
+|     :---:     |       :---:       |
+|   `php-fpm`   |  5.6_7.2_7.3_7.4  |
+|    `MySQL`    |         8         |
+|    `Nginx`    |      stable       |
+|   `Composer`  |      latest       |
 
 ### Configuration ###
 
