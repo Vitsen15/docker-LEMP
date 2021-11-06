@@ -42,8 +42,6 @@ services:
     networks:
       internal:
         ipv4_address: ${SUBNET_IP}.3
-    depends_on:
-      - mysql
 
   php-fpm:
     build:
