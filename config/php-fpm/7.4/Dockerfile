@@ -6,8 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG USER_ID
 ARG GROUP_ID
 
-RUN apt-get update \ 
-    && apt-get install -y \
+RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -26,7 +25,7 @@ RUN apt-get update \
         wget \
         git \
         unzip \
-    && pecl install xdebug \
+    && pecl install xdebug-3.1.5 \
     && pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
     && pecl install imagick \
