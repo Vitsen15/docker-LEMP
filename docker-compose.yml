@@ -9,7 +9,7 @@ networks:
 
 services:
   mysql:
-    build: config/mysql
+    image: "mysql:8"
     container_name: ${COMPOSE_PROJECT_NAME}_mysql
     command: --max_allowed_packet=32505856
     environment:
